@@ -1,0 +1,18 @@
+---
+- yum: name={{item}} state=present
+  with_items:
+    - net-snmp
+    - net-snmp-utils
+  name: Install snmpd server and utilities
+- template:
+    src: "snmpd.conf.j2"
+    dest: /etc/snmp/snmpd.conf
+    owner: root
+    group: root
+    mode: 0600
+  name: Install default snmpf.conf
+  notify: restart snmpd
+  when: snmpd_config == true
+- set_fact:
+    snmpd_syslocation: "{{snmpd_syslocation}}"
+    snmpd_syscontact: "{{snmpd_syscontact}}"

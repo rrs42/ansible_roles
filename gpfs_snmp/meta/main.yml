@@ -1,0 +1,3 @@
+dependencies:
+  - role: snmp_host
+    snmpd_config: false

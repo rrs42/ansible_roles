@@ -1,0 +1,13 @@
+---
+  - name: get default runlevel
+    command: systemctl get-default
+    register: runlevel
+  - name: set graphical interface target
+    command: systemctl set-default graphical.target
+    when: runlevel.stdout != "graphical.target"
+  - name: is graphcical currently active
+    command: systemctl is-active graphical.target
+    register: graphical
+  - name: Switch to graphical runlevel
+    command: systemctl isolate graphical.target
+    when: graphical.stdout != "active"

@@ -1,0 +1,10 @@
+---
+- name: Install Influxdb
+  yum:
+    name: influxdb
+    state: present
+- name: InfluxDB service
+  service:
+    name: influxdb
+    enabled: true
+    state: started

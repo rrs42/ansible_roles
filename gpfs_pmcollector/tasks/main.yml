@@ -1,0 +1,14 @@
+---
+- yum: name={{item}} state=present
+  with_items:
+    - gpfs.gss.pmcollector
+- copy: 
+    src: ZIMonCollector.cfg
+    dest: /opt/IBM/zimon
+    owner: root
+    group: root
+    mode: 0644
+- service:
+    name: pmcollector
+    enabled: yes
+    state: started

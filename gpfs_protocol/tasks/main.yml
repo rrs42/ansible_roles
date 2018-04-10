@@ -1,0 +1,11 @@
+---
+- debug: msg="Protocol node"
+- selinux:
+    state: disabled
+- yum: 
+    name: "{{ item }}"
+    disablerepo: epel
+    state: present
+  with_items:
+    - nfs-ganesha
+    - nfs-ganesha-gpfs

@@ -1,0 +1,39 @@
+---
+- name: Create lib symlinks
+  file:
+    state: link
+    src: '{{item.src}}'
+    path: '/lib64/{{item.path}}'
+  with_items:
+    - {path: 'libnetsnmpagent.so', src: 'libnetsnmpagent.so.31'}
+    - {path: 'libnetsnmphelpers.so', src: 'libnetsnmphelpers.so.31'}
+    - {path: 'libnetsnmpmibs.so', src: 'libnetsnmpmibs.so.31'}
+    - {path: 'libnetsnmp.so', src: 'libnetsnmp.so.31'}
+    - {path: 'libwrap.so', src: 'libwrap.so.0'}
+    - {path: 'libcrypto.so', src: 'libcrypto.so.10'}
+- template:
+    src: "snmpd.conf.j2"
+    dest: /etc/snmp/snmpd.conf
+    owner: root
+    group: root
+    mode: 0600
+  name: Install gpfs configured snmpd.conf
+  notify: restart snmpd    
+- lineinfile:
+    path: /etc/snmp/snmp.conf
+    line: 'mibdirs +/usr/lpp/mmfs/data'
+    state: present
+    create: yes
+    mode: 0644
+  notify: restart snmpd
+- lineinfile:
+    path: /etc/snmp/snmp.conf
+    line: 'mibs +GPFS-MIB'
+    state: present
+    create: yes
+    mode: 0644
+  notify: restart snmpd
+- name: fix permissions on GPFS MIB
+  file:
+    path: /usr/lpp/mmfs/data/GPFS-MIB.txt
+    mode: 0644

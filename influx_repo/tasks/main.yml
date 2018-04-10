@@ -1,0 +1,8 @@
+---
+- yum_repository:
+    name: influx-rhel-$releasever
+    description: InfluxDB Repository
+    baseurl: https://repos.influxdata.com/rhel/$releasever/$basearch/stable
+    file: influx
+    gpgkey: https://repos.influxdata.com/influxdb.key
+  name: setup Influx yum repo

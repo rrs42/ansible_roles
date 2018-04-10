@@ -1,0 +1,5 @@
+---
+snmpd_syscontact: root@localhost
+snmpd_syslocation: None set
+
+snmpd_config: true

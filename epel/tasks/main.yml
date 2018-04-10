@@ -1,0 +1,3 @@
+---
+- name: Use EPEL repository 
+  yum: name="epel-release" state=present

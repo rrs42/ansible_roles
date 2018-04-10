@@ -1,0 +1,7 @@
+---
+- yum_repository:
+    name: grafana
+    description: Grafana Yum Repository
+    baseurl: https://packagecloud.io/grafana/stable/el/6/$basearch
+    gpgkey: https://packagecloud.io/gpg.key https://grafanarel.s3.amazonaws.com/RPM-GPG-KEY-grafana
+  name: grafana repository

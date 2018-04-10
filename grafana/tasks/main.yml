@@ -1,0 +1,10 @@
+---
+- name: Install grapfana
+  yum:
+    name: grafana
+    state: present
+- name: grafana start
+  service:
+    name: grafana-server
+    enabled: yes
+    state: started

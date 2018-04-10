@@ -1,0 +1,14 @@
+---
+- yum: name={{item}} state=present
+  with_items:
+    - gpfs.gss.pmsensors
+- copy: 
+    src: ZIMonSensors.cfg
+    dest: /opt/IBM/zimon
+    owner: root
+    group: root
+    mode: 0644
+- service:
+    name: pmsensors
+    enabled: yes
+    state: started

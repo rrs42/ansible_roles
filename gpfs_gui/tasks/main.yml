@@ -1,0 +1,6 @@
+---
+- yum: name=gpfs.gui state=present
+- service:
+    name: gpfsgui.service
+    state: started
+    enabled: yes

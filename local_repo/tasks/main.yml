@@ -1,0 +1,8 @@
+---
+- yum_repository:
+    name: local
+    description: Locally built RPMS
+    baseurl: http://{{repo_host}}:{{repo_port}}/repo/local
+    proxy: "_none_"
+    gpgcheck: no
+  name: Set up local yum repo
