@@ -1,3 +1,6 @@
-{% for host in host_list %}
-{{ host.name.split('.')[0] }} all
+{% for groupname in groups %}
+{% if groups[groupname]|length > 0 %}
+{% for hname in groups[groupname] %}
+{{ hostvars[hname].inventory_hostname.split('.')[0] }}{{ "," if not loop.last else ''}}{% endfor %} {{groupname}}
+{% endif %}
 {% endfor %}
