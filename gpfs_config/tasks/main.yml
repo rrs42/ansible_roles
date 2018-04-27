@@ -1,0 +1,7 @@
+---
+- template:
+    src: node_file.j2
+    dest: /root/node_file
+- template:
+    src: node_license.j2
+    dest: /root/node_license
