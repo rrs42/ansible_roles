@@ -1,8 +1,10 @@
 ---
-- template:
+- name: create node_file
+  template:
     src: node_file.j2
     dest: /root/node_file
-- template:
+- name: create node_license files
+  template:
     src: node_license.j2
     dest: "/root/node_license.{{license_type}}"
   loop:
