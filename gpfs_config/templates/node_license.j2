@@ -1,3 +1,5 @@
 {% for host in groups["gpfs"] %}
-{{host.split(".")[0]}}:{{ hostvars[host]["gpfs_license"]}}
+{% if hostvars[host]["gpfs_license"] == license_type %}
+{{host.split(".")[0]}}
+{% endif %}
 {% endfor %}

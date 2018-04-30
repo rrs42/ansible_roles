@@ -1,0 +1,9 @@
+{% for nsdserver in groups["nsdserver"]  %}
+%nsd:
+	device=/dev/xvdb
+	servers={{nsdserver}}
+	nsd=nsd001
+	usage=dataAndMetadata
+	failureGroup=1
+	pool=system
+{% endfor %}
