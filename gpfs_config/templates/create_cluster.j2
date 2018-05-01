@@ -1,0 +1,6 @@
+mmcrcluster -N node_file --use-sudo-wrapper --sudo-user gpfs -C awstest.fnmoc.navy.mil -U fnmoc.navy.mil -A
+
+mmchlicense server --accept -N node_license.server
+mmchlicense client --accept -N node_license.client
+
+mmstartup -a

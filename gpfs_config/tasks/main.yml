@@ -13,3 +13,9 @@
     # - fpo
   loop_control:
     loop_var: license_type
+
+- name: cluster creation script
+  template:
+    src: create_cluster.j2
+    dest: /root/create_cluster.sh
+    mode: '0755'
