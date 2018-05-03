@@ -15,6 +15,9 @@
     loop_var: license_type
 
 - name: cluster creation script
+  debugger: on_failed
+  tags:
+    - cc_script
   template:
     src: create_cluster.j2
     dest: /root/create_cluster.sh

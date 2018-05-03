@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 mmcrcluster -N node_file --use-sudo-wrapper --sudo-user gpfs -C awstest.fnmoc.navy.mil -U fnmoc.navy.mil -A
 
@@ -6,3 +6,15 @@ mmchlicense server --accept -N node_license.server
 mmchlicense client --accept -N node_license.client
 
 mmstartup -a
+
+echo "Pausing for cluster init..."
+sleep 120
+
+mmperfmon config generate --collectors {{ groups["frontend"]|join(',') }}
+mmchnode --perfmon -N all
+mmperfmon config update GPFSDiskCap.restrict=gui_node GPFSDiskCap.period=86400
+
+systemctl start pmcollector
+
+cd /usr/lpp/mmfs/gui/cli
+./initgui
