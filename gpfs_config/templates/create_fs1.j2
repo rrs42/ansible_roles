@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mmcrnsd -F ./nsd.stanza
+
+mmcrfs fs1 -F ./nsd.stanza -T /gpfs/fs1
+
+mmmount all -a

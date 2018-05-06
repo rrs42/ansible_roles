@@ -1,9 +1,14 @@
-{% for nsdserver in groups["nsdserver"]  %}
+{%- for nsdserver in groups["nsdserver"]  -%}
+{%- set serverloop = loop -%}
+{%- for dev in hostvars[nsdserver]["ansible_local"]["nsd_devices"]  -%}
+
 %nsd:
-	device=/dev/xvdb
-	servers={{nsdserver}}
-	nsd=nsd001
+	device=/dev/{{dev}}
+	servers={{hostvars[nsdserver]["ansible_hostname"]}}
+	nsd=nsd{{serverloop.index}}{{loop.index}}
 	usage=dataAndMetadata
 	failureGroup=1
 	pool=system
-{% endfor %}
+
+{% endfor -%}
+{% endfor -%}

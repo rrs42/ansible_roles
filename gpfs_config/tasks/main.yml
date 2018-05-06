@@ -22,3 +22,26 @@
     src: create_cluster.j2
     dest: /root/create_cluster.sh
     mode: '0755'
+
+- name: file system creation script
+  tags:
+    - cc_script
+  template:
+    src: create_fs1.j2
+    dest: /root/create_fs1.sh
+    mode: '0755'
+
+- name: debug
+  tags:
+    - nsd
+  debug:
+    var: cluster_def
+
+- name: create nsd.stanza file
+  debugger: on_failed
+  tags:
+    - nsd
+  template:
+    src: nsd_stanza.j2
+    dest: /root/nsd.stanza
+    mode: '0644'
