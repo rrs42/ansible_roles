@@ -1,0 +1,16 @@
+#!/bin/bash
+
+json="["
+
+disks=""
+
+for disk in `lsblk --nodeps -n | awk -F' ' '{print $1}' | grep -v xvda`
+do
+	disks="${disks} \"${disk}\","
+done
+
+disks=`echo ${disks}|sed 's/,$//'`
+
+json="${json}${disks}]"
+
+echo $json

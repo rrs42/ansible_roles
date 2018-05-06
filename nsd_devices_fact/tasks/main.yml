@@ -1,0 +1,11 @@
+---
+- name: Create facts.d directory
+  file:
+    path: "/etc/ansible/facts.d"
+    state: "directory"
+
+- name: Install nsd server disk device task
+  copy:
+    src: nsd_devices.fact
+    dest: "/etc/ansible/facts.d/nsd_devices.fact"
+    mode: "0755"
