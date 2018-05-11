@@ -1,0 +1,12 @@
+---
+- name: restart apache httpd
+  service:
+    name: httpd
+    state: restarted
+    enabled: yes
+  listen: "restart web"
+- name: reload apache config
+  service: 
+    name: httpd
+    state: reloaded
+  listen: "reload web"

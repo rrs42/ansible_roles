@@ -1,0 +1,7 @@
+---
+- name: install apache httpd
+  yum:
+    name:
+      - httpd
+    state: present
+  notify: restart web
