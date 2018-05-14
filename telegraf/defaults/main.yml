@@ -2,3 +2,4 @@
 region: "none"
 influxdb_server: "localhost"
 gpfs_snmp_host: "none"
+snmp_client: no

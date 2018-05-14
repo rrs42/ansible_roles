@@ -1,5 +1,6 @@
 [global_tags]
-  dc = {{region}}
+  dc = "{{ansible_ec2_placement_region}}"
+  az = "{{ansible_ec2_placement_availability_zone}}"
 
 
 [agent]
@@ -19,7 +20,12 @@
 
 
 [[outputs.influxdb]]
-  urls = ["http://{{influxdb_server}}:8086"]
+  urls = [
+{%- for server in groups["sysmon"] -%}
+  "http://{{server}}:8086"
+  {%- if not loop.last -%},{%- endif -%}
+{%- endfor -%}]
+
   database = "telegraf"
 
 # Read metrics about cpu usage

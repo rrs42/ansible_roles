@@ -12,5 +12,5 @@
     mode: "0644"
   vars:
     gpfs_snmp_host: "playbook_none"
-  notfiy: "restart telegraf"
+  notify: "restart telegraf"
   

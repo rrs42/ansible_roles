@@ -3,4 +3,4 @@
   service:
     name: telegraf
     enabled: yes
-    status: restarted
+    state: restarted
