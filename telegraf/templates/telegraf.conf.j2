@@ -2,6 +2,11 @@
   dc = "{{ansible_ec2_placement_region}}"
   az = "{{ansible_ec2_placement_availability_zone}}"
 
+{% for group in group_names -%}
+  {% if group in ["sysmon", "frontend", "compute", "nsdserver", "idmserver"] %}
+  group = "{{group}}"
+  {% endif %}
+{% endfor %}
 
 [agent]
   interval = "10s"
