@@ -1,5 +1,5 @@
 ---
-- name: Install grapfana
+- name: Install grafana-server
   yum:
     name: grafana
     state: present
