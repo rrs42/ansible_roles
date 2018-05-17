@@ -12,7 +12,8 @@ sleep 120
 
 mmperfmon config generate --collectors {{ groups["frontend"]|join(',') }}
 mmchnode --perfmon -N all
-mmperfmon config update GPFSDiskCap.restrict=gui_node GPFSDiskCap.period=86400
+mmperfmon config update GPFSDiskCap.restrict=gui_node GPFSDiskCap.period=86400 Diskstat.period=10 GPFSDisk.period=10 GPFSPoolIO.period=10
+
 
 systemctl start pmcollector
 
