@@ -1,10 +1,22 @@
 ---
-- name: Install grapfana
+- name: Install grafana
   yum:
     name: grafana
     state: present
-- name: grafana start
-  service:
-    name: grafana-server
-    enabled: yes
-    state: started
+  notify: grafana
+- name: Install http proxy def
+  copy:
+    src: httpd-grafana.conf
+    dest: /etc/httpd/conf.d/grafana.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: reload web
+- name: Install grafana config
+  copy:
+    src: grafana.ini
+    dest: /etc/grafana/grafana.ini
+    owner: root
+    group: grafana
+    mode: '0640'
+  notify: grafana

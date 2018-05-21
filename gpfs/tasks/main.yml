@@ -1,6 +1,6 @@
 ---
 - yum_repository:
-    baseurl: "http://{{local_repo_host}}:{{local_repo_port}}/repo/gpfs/{{gpfs_version}}/gpfs_rpms"
+    baseurl: "{{gpfs_repo_base}}gpfs_rpms"
     description: "GPFS Base rpms"
     name: gpfs_base
     proxy: "_none_"
@@ -8,36 +8,36 @@
     file: gpfs
   name: gpfs base repo
 - yum_repository:
-    baseurl: "http://{{local_repo_host}}:{{local_repo_port}}/repo/gpfs/{{gpfs_version}}/gpfs_rpms/rhel7"
-    description: "GPFS Base rpms rhel7"
-    name: gpfs_base_rhel7
+    baseurl: "{{gpfs_repo_base}}gplbin"
+    description: "GPFS Kernel Module rpms"
+    name: gpfs_gplbin
     proxy: "_none_"
     gpgcheck: no
     file: gpfs
-  name: gpfs base rhel7 repo
+  name: gpfs gplbin repo
 - yum_repository:
-    baseurl: "http://{{local_repo_host}}:{{local_repo_port}}/repo/gpfs/{{gpfs_version}}/zimon_rpms/rhel7"
+    baseurl: "{{gpfs_repo_base}}zimon_rpms"
     description: "GPFS monitoring RPMS"
     name: gpfs_zimon
     proxy: "_none_"
     gpgcheck: no
     file: gpfs
 - yum_repository:
-    baseurl: "http://{{local_repo_host}}:{{local_repo_port}}/repo/gpfs/{{gpfs_version}}/ganesha_rpms/rhel7"
+    baseurl: "{{gpfs_repo_base}}ganesha_rpms"
     description: "GPFS NFS RPMS"
     name: gpfs_ganesha
     proxy: "_none_"
     gpgcheck: no
     file: gpfs
 - yum_repository:
-    baseurl: "http://{{local_repo_host}}:{{local_repo_port}}/repo/gpfs/{{gpfs_version}}/object_rpms/rhel7"
+    baseurl: "{{gpfs_repo_base}}object_rpms"
     description: "GPFS Object RPMS"
     name: gpfs_object
     proxy: "_none_"
     gpgcheck: no
     file: gpfs
 - yum_repository:
-    baseurl: "http://{{local_repo_host}}:{{local_repo_port}}/repo/gpfs/{{gpfs_version}}/smb_rpms/rhel7"
+    baseurl: "{{gpfs_repo_base}}smb_rpms"
     description: "GPFS SMB RPMS"
     name: gpfs_smb
     proxy: "_none_"
@@ -46,10 +46,15 @@
 - name: install GPFS path profile
   template: src=gpfs.sh.j2 dest=/etc/profile.d/gpfs.sh owner=root group=root mode="0644"
 - name: install gpfs packages
-  yum: name={{ item }} state="present"
-  with_items: "{{ gpfs_packages }}"
-- name: Build kernel modules
-  command: bash -c "LINUX_DISTRIBUTION=REDHAT_AS_LINUX make Autoconfig World InstallImages"
-  args:
-    chdir: /usr/lpp/mmfs/src
-    creates: /lib/modules/{{ansible_kernel}}/extra/*.ko
+  yum: 
+    name: "{{ gpfs_packages }}"
+    state: "present"
+- name: install gpfs kernel modules rpm
+  yum:
+    name: "gpfs.gplbin-{{ansible_kernel}}"
+    state: "present"
+# - name: Build kernel modules
+#   command: bash -c "LINUX_DISTRIBUTION=REDHAT_AS_LINUX make Autoconfig World InstallImages"
+#   args:
+#     chdir: /usr/lpp/mmfs/src
+#     creates: /lib/modules/{{ansible_kernel}}/extra/*.ko

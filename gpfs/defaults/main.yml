@@ -1,5 +1,5 @@
 local_repo_host: mirror
 local_repo_port: 80
 gpfs_packages: [gpfs.gskit,gpfs.base,gpfs.docs,gpfs.ext,gpfs.gpl,gpfs.msg.en_US]
-gpfs_version: 4.2
-gpfs_base_version: "{{gpfs_version}}.0-0"
+gpfs_version: 5.0
+gpfs_repo_base: "http://{{local_repo_host}}:{{local_repo_port}}/mrepo/gpfs-x86_64/RPMS."

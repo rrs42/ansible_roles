@@ -1,7 +1,8 @@
 #!/bin/bash -x
+GPFS_PATH=/usr/lpp/mmfs/bin
 
-mmcrnsd -F ./nsd.stanza
+${GPFS_PATH}/mmcrnsd -F ./nsd.stanza
 
-mmcrfs fs1 -F ./nsd.stanza -T /gpfs/fs1
+${GPFS_PATH}/mmcrfs fs1 -F ./nsd.stanza -T /gpfs/fs1
 
-mmmount all -a
+${GPFS_PATH}/mmmount all -a

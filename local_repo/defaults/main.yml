@@ -1,3 +1,4 @@
 ---
-repo_host: 10.0.2.2
-repo_port: 80
+local_repo_host: 10.0.2.2
+local_repo_port: 80
+local_repo_base_url: "http://{{local_repo_host}}:{{local_repo_port}}/mrepo/centos-x86_64/RPMS."

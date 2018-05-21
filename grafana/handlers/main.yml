@@ -1,0 +1,7 @@
+---
+- name: grafana service
+  service:
+    name: grafana-server
+    enabled: yes
+    state: started
+  listen: grafana

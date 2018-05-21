@@ -1,8 +1,48 @@
 ---
-- yum_repository:
-    name: local
-    description: Locally built RPMS
-    baseurl: http://{{repo_host}}:{{repo_port}}/repo/local
-    proxy: "_none_"
+- name: Local Centos Base OS repo
+  yum_repository:
+    name: local-centos-base
+    description: Local centos repo
+    baseurl: "{{local_repo_base_url}}os"
     gpgcheck: no
-  name: Set up local yum repo
+    proxy: "_none_"
+    enabled: yes
+    file: local
+- name: Local Centos Updates repo
+  yum_repository:
+    name: local-centos-updates
+    description: Local centos updates
+    baseurl: "{{local_repo_base_url}}updates"
+    gpgcheck: no
+    proxy: "_none_"
+    enabled: yes
+    file: local
+- name: Local Centos Extras repo
+  yum_repository:
+    name: local-centos-extras
+    description: Local centos extras
+    baseurl: "{{local_repo_base_url}}extras"
+    gpgcheck: no
+    proxy: "_none_"
+    enabled: yes
+    file: local
+- name: Local Centos epel repo
+  yum_repository:
+    name: local-centos-epel
+    description: Local centos updates
+    baseurl: "{{local_repo_base_url}}epel"
+    gpgcheck: no
+    proxy: "_none_"
+    enabled: no
+    file: local
+- name: Local RPMS
+  yum_repository:
+    name: local
+    description: Local centos updates
+    baseurl: "{{local_repo_base_url}}local"
+    gpgcheck: no
+    proxy: "_none_"
+    enabled: yes
+    file: local
+- name: disable default repos
+  command: "yum-config-manager --disable base,extras,updates,epel"
