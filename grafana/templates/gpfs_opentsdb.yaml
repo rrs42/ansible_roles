@@ -1,0 +1,9 @@
+apiVersion: 1
+
+datasources:
+  - name: GPFS
+    type: opentsdb
+    access: proxy
+    url: http://{{ groups['frontend']|last  }}:4242
+    jsonData:
+      tsdbVersion: 2.2

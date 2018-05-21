@@ -3,5 +3,5 @@
   service:
     name: grafana-server
     enabled: yes
-    state: started
+    state: restarted
   listen: grafana

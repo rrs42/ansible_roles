@@ -20,3 +20,31 @@
     group: grafana
     mode: '0640'
   notify: grafana
+- name: install influxdb datasource
+  copy:
+    src: local_influxdb.yaml
+    dest: /etc/grafana/provisioning/datasources/
+    owner: root
+    group: grafana
+    mode: '0640'
+  notify: grafana
+- name: install system monitoring dashboards
+  copy:
+    src: "{{item}}"
+    dest: /etc/grafana/provisioning/dashboards/
+    owner: root
+    group: grafana
+    mode: '0640'
+    directory_mode: '0755'
+  loop:
+    - system_dashboards
+    - system_dashboards.yaml
+  notify: grafana
+- name: install gpfs-opentsdb data source
+  template:
+    src: gpfs_opentsdb.yaml
+    dest: /etc/grafana/provisioning/datasources/
+    owner: root
+    group: grafana
+    mode: '0640'
+  notify: grafana
