@@ -29,7 +29,7 @@
 - name: Local Centos epel repo
   yum_repository:
     name: local-centos-epel
-    description: Local centos updates
+    description: Local centos epel updates
     baseurl: "{{local_repo_base_url}}epel"
     gpgcheck: no
     proxy: "_none_"
@@ -38,7 +38,7 @@
 - name: Local RPMS
   yum_repository:
     name: local
-    description: Local centos updates
+    description: Locally built packages
     baseurl: "{{local_repo_base_url}}local"
     gpgcheck: no
     proxy: "_none_"
