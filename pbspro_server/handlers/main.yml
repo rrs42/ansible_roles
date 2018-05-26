@@ -1,0 +1,5 @@
+---
+- name: restart pbs
+  service: 
+    name: pbs
+    state: restarted

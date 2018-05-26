@@ -1,0 +1,13 @@
+---
+- name: Install pbs.conf file
+  template:
+    src: pbs.conf.j2
+    dest: /etc/pbs.conf
+  vars:
+    pbs_server: "{{ groups['frontend'] }}"
+  notify: restart pbs
+- name: Install PBSPro MoM (execution environment)
+  yum:
+    name: pbspro-execution
+    state: present
+  notify: restart pbs
