@@ -11,3 +11,7 @@
     name: pbspro-server
     state: present
   notify: restart pbs
+- name: PBS initial node registration
+  template:
+    src: pbs_nodes.txt.j2
+    dest: /root/pbs_nodes
