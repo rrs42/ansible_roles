@@ -1,0 +1,3 @@
+{% for host in groups["all"] %}
+host-record={{ hostvars[host]["ansible_hostname"] }}.core-mem.net,{{ hostvars[host]["ansible_eth0"]["ipv4"]["address"] }}
+{% endfor %}
