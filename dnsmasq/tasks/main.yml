@@ -6,3 +6,4 @@
     mode: 644
     owner: root
     group: root
+  notify: dnsmasq
