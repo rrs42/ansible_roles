@@ -1,4 +1,4 @@
-{%- for nsdserver in groups["nsdserver"]  -%}
+{%- for nsdserver in groups["nsdserver"]|sort  -%}
 {%- set serverloop = loop -%}
 {%- for dev in hostvars[nsdserver]["ansible_local"]["nsd_devices"]  -%}
 
