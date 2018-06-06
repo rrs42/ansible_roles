@@ -1,6 +1,6 @@
-{% for groupname in groups %}
+{% for groupname in groups|sort %}
 {% if groups[groupname]|length > 0 %}
-{% for hname in groups[groupname] %}
+{% for hname in groups[groupname]|sort %}
 {{ hostvars[hname].inventory_hostname.split('.')[0] }}{{ "," if not loop.last else ''}}{% endfor %} {{groupname}}
 {% endif %}
 {% endfor %}
