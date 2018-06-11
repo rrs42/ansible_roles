@@ -1,0 +1,16 @@
+---
+- name: update resolv.conf
+  template:
+    dest: /etc/resolv.conf
+    src: resolv.conf.j2
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart nm
+- name: configure Network Manager
+  ini_file:
+    path: /etc/NetworkManager/NetworkManager.conf
+    section: main
+    option: dns
+    value: none
+  notify: restart nm
