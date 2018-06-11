@@ -1,4 +1,12 @@
 ---
+- name: Get DNS server from NM
+  shell: |
+    nmcli -m multiline  -g IP4.DNS device show eth0 | awk 'BEGIN{ FS=":"}{print $2}'
+  register: result
+- debug:
+    var: result
+- set_fact:
+    dnsserver: "{{ result.stdout }}"
 - name: Build DNSMasq zone file
   template:
     src: cluster.conf.j2
