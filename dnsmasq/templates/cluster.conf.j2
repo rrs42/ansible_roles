@@ -1,13 +1,13 @@
+{% for host in groups["all"]|sort %}
+host-record = {{ hostvars[host]["ansible_hostname"] }}.core-mem.net,{{ hostvars[host]["ansible_eth0"]["ipv4"]["address"] }}
+{% endfor %}
 {% set idmserver = groups["idmserver"]|sort|first %}
-srv-host =_kerberos._udp.core-mem.net,{{ idmserver }},88
-srv-host =_kerberos._tcp.core-mem.net,{{ idmserver }},88
-srv-host =_kerberos-master._tcp.core-mem.net,{{ idmserver }},88
-srv-host =_kerberos-master._udp.core-mem.net,{{ idmserver }},88
-srv-host =_kpasswd._tcp.core-mem.net,{{ idmserver }},88
-srv-host =_kpasswd._udp.core-mem.net,{{ idmserver }},88
-srv-host =_ldap._tcp.core-mem.net,{{ idmserver }},389
-txt-record=_kerberos.core-mem.net,"CORE-MEM.NET"
-domain-needed
-bogus-priv
-no-resolv
-server={{ dnsserver }}
+{% set idmserver = hostvars[idmserver]["ansible_hostname"] + ".core.mem.net" %}
+srv-host = _kerberos._udp.core-mem.net,{{ idmserver }},88
+srv-host = _kerberos._tcp.core-mem.net,{{ idmserver }},88
+srv-host = _kerberos-master._tcp.core-mem.net,{{ idmserver }},88
+srv-host = _kerberos-master._udp.core-mem.net,{{ idmserver }},88
+srv-host = _kpasswd._tcp.core-mem.net,{{ idmserver }},88
+srv-host = _kpasswd._udp.core-mem.net,{{ idmserver }},88
+srv-host = _ldap._tcp.core-mem.net,{{ idmserver }},389
+txt-record = _kerberos.core-mem.net,"CORE-MEM.NET"
