@@ -8,6 +8,7 @@
     proxy: "_none_"
     enabled: yes
     file: local
+  when: use_local_centos
 - name: Local Centos Updates repo
   yum_repository:
     name: local-centos-updates
@@ -17,6 +18,7 @@
     proxy: "_none_"
     enabled: yes
     file: local
+  when: use_local_centos
 - name: Local Centos Extras repo
   yum_repository:
     name: local-centos-extras
@@ -26,6 +28,7 @@
     proxy: "_none_"
     enabled: yes
     file: local
+  when: use_local_centos
 - name: Local Centos epel repo
   yum_repository:
     name: local-centos-epel
@@ -35,6 +38,7 @@
     proxy: "_none_"
     enabled: no
     file: local
+  when: use_local_centos
 - name: Local RPMS
   yum_repository:
     name: local
@@ -46,3 +50,4 @@
     file: local
 - name: disable default repos
   command: "yum-config-manager --disable base,extras,updates,epel"
+  when: use_local_centos
