@@ -1,0 +1,12 @@
+---
+- name: install ipaserver
+  yum:
+    name: ipa-server
+    state: present
+- name: build server configuration script
+  template:
+    src: ipaserver_config.sh
+    dest: /root
+    mode: "0755"
+# - name: configure server
+#   command: /root/ipaserver_config.sh

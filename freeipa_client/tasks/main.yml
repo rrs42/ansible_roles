@@ -1,0 +1,11 @@
+---
+- name: install ipa-client packages
+  yum:
+    name:
+      - ipa-client
+    state: present
+- name: script to join ipa-server
+  template:
+    src: ipaclient_config.sh
+    dest: /root
+    mode: "0755"
