@@ -1,6 +1,6 @@
 {%- for nsdserver in groups["nsdserver"]|sort  -%}
 {%- set serverloop = loop -%}
-{%- for dev in hostvars[nsdserver]["ansible_local"]["nsd_devices"]  -%}
+{%- for dev in hostvars[nsdserver]["ansible_local"]["extra_disks"]  -%}
 
 %nsd:
 	device=/dev/{{dev}}
