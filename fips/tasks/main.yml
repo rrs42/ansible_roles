@@ -4,4 +4,7 @@
     regexp: '(.*)fips=1(.*)'
     replace: '\1fips=0\2'
     backup: yes
+  register: result
+  notify: reboot
 - command: grub2-mkconfig -o /etc/grub2.cfg
+  when: result is changed
