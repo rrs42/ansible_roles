@@ -4,7 +4,7 @@ json="["
 
 disks=""
 
-for disk in `lsblk --nodeps -n | awk -F' ' '{print $1}' | grep -v xvda`
+for disk in `lsblk --nodeps -n --output NAME | grep -v xvda`
 do
 	disks="${disks} \"${disk}\","
 done
