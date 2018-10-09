@@ -1,0 +1,14 @@
+---
+- name: Install Cherry Py
+  shell: easy_setup CherryPy
+  creates: /usr/lib64/python2.7/site-packages/cherrypy
+- name: Unpack grafana bridge
+  unarchive: 
+    src: zimonGrafanaIntf_v3.1.tar
+    dest: /opt/
+    creates: /opt/zimonGrafanaIntf_v3.1
+- name: Symlink zimonGrafanaIntf
+  file:
+    state: link
+    src: /opt/zimonGrafanaIntf_v3.1
+    dest: /opt/zimon-grafana
