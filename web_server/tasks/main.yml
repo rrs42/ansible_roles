@@ -5,3 +5,8 @@
       - httpd
     state: present
   notify: restart web
+- name: allow apache to make connections
+  seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
