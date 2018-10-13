@@ -31,7 +31,7 @@
   when: use_local_centos
 - name: Local Centos epel repo
   yum_repository:
-    name: local-centos-epel
+    name: epel
     description: Local centos epel updates
     baseurl: "{{local_repo_base_url}}epel"
     gpgcheck: no
@@ -48,6 +48,11 @@
     proxy: "_none_"
     enabled: yes
     file: local
+- name: Remove epel-release package
+  yum:
+    name: epel-release
+    state: absent
+  when: use_local_centos
 - name: disable default repos
   command: "yum-config-manager --disable base,extras,updates,epel"
   when: use_local_centos
