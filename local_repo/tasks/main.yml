@@ -56,3 +56,47 @@
 - name: disable default repos
   command: "yum-config-manager --disable base,extras,updates,epel"
   when: use_local_centos
+- yum_repository:
+    baseurl: "{{gpfs_repo_base_url}}gpfs_rpms"
+    description: "GPFS Base rpms"
+    name: gpfs_base
+    proxy: "_none_"
+    gpgcheck: no
+    file: gpfs
+  name: gpfs base repo
+- yum_repository:
+    baseurl: "{{gpfs_repo_base_url}}gplbin"
+    description: "GPFS Kernel Module rpms"
+    name: gpfs_gplbin
+    proxy: "_none_"
+    gpgcheck: no
+    file: gpfs
+  name: gpfs gplbin repo
+- yum_repository:
+    baseurl: "{{gpfs_repo_base_url}}zimon_rpms"
+    description: "GPFS monitoring RPMS"
+    name: gpfs_zimon
+    proxy: "_none_"
+    gpgcheck: no
+    file: gpfs
+- yum_repository:
+    baseurl: "{{gpfs_repo_base_url}}ganesha_rpms"
+    description: "GPFS NFS RPMS"
+    name: gpfs_ganesha
+    proxy: "_none_"
+    gpgcheck: no
+    file: gpfs
+- yum_repository:
+    baseurl: "{{gpfs_repo_base_url}}object_rpms"
+    description: "GPFS Object RPMS"
+    name: gpfs_object
+    proxy: "_none_"
+    gpgcheck: no
+    file: gpfs
+- yum_repository:
+    baseurl: "{{gpfs_repo_base_url}}smb_rpms"
+    description: "GPFS SMB RPMS"
+    name: gpfs_smb
+    proxy: "_none_"
+    gpgcheck: no
+    file: gpfs
