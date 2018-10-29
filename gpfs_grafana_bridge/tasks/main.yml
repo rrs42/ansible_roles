@@ -1,9 +1,10 @@
 ---
-- name: Install Cherry Py
-  shell: easy_setup CherryPy
-  creates: /usr/lib64/python2.7/site-packages/cherrypy
+- name: Install CherryPy
+  yum:
+    name: python-cherrypy
+    state: installed
 - name: Unpack grafana bridge
-  unarchive: 
+  unarchive:
     src: zimonGrafanaIntf_v3.1.tar
     dest: /opt/
     creates: /opt/zimonGrafanaIntf_v3.1
@@ -12,3 +13,22 @@
     state: link
     src: /opt/zimonGrafanaIntf_v3.1
     dest: /opt/zimon-grafana
+- name: install bridge unit file
+  copy:
+    dest: /etc/systemd/system/zimon-bridge.service
+    content: |
+        [Unit]
+        Description=ZIMON-Grafana bridge service
+        After=pmcollector.service
+
+        [Service]
+        Type=simple
+        ExecStart=/usr/bin/python /opt/zimon-grafana/zimonGrafanaIntf.py
+        KillMode=process
+
+        [Install]
+        WantedBy=multi-user.target
+- name: enable and activate bridge serivce
+  service:
+    name: zimon-bridge
+    enabled: yes
