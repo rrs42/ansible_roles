@@ -63,6 +63,7 @@
     proxy: "_none_"
     gpgcheck: no
     file: gpfs
+    enabled: yes
   name: gpfs base repo
 - yum_repository:
     baseurl: "{{gpfs_repo_base_url}}gplbin"
@@ -71,6 +72,7 @@
     proxy: "_none_"
     gpgcheck: no
     file: gpfs
+    enabled: yes
   name: gpfs gplbin repo
 - yum_repository:
     baseurl: "{{gpfs_repo_base_url}}zimon_rpms"
@@ -79,6 +81,7 @@
     proxy: "_none_"
     gpgcheck: no
     file: gpfs
+    enabled: yes
 - yum_repository:
     baseurl: "{{gpfs_repo_base_url}}ganesha_rpms"
     description: "GPFS NFS RPMS"
@@ -86,6 +89,7 @@
     proxy: "_none_"
     gpgcheck: no
     file: gpfs
+    enabled: no
 - yum_repository:
     baseurl: "{{gpfs_repo_base_url}}object_rpms"
     description: "GPFS Object RPMS"
@@ -93,6 +97,7 @@
     proxy: "_none_"
     gpgcheck: no
     file: gpfs
+    enabled: no
 - yum_repository:
     baseurl: "{{gpfs_repo_base_url}}smb_rpms"
     description: "GPFS SMB RPMS"
@@ -100,3 +105,4 @@
     proxy: "_none_"
     gpgcheck: no
     file: gpfs
+    enabled: no
