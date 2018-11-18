@@ -4,3 +4,9 @@
     name: pbs
     state: restarted
     enabled: yes
+- name: cleanup env
+  file:
+    path: /var/spool/pbs/mom_priv/config
+    state: absent
+  listen: pbs config
+  notify: restart pbs

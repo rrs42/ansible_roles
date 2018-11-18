@@ -5,7 +5,7 @@
     dest: /etc/pbs.conf
   vars:
     pbs_server: "{{ groups['frontend'] }}"
-  notify: restart pbs
+  notify: pbs config
 - name: Install PBSPro MoM (execution environment)
   yum:
     name: pbspro-execution
