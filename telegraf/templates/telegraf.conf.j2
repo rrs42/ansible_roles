@@ -1,6 +1,6 @@
 [global_tags]
-  dc = "{{ansible_ec2_placement_region}}"
-  az = "{{ansible_ec2_placement_availability_zone}}"
+  aws_region = "{{ansible_ec2_placement_region}}"
+  aws_az = "{{ansible_ec2_placement_availability_zone}}"
 
 {% for group in group_names -%}
   {% if group in ["sysmon", "frontend", "compute", "nsdserver", "idmserver"] %}
@@ -25,11 +25,7 @@
 
 
 [[outputs.influxdb]]
-  urls = [
-{%- for server in groups["sysmon"] -%}
-  "http://{{server}}:8086"
-  {%- if not loop.last -%},{%- endif -%}
-{%- endfor -%}]
+  urls = [ "http://sysmon.core-mem.net:8086" ]
 
   database = "telegraf"
 
@@ -61,6 +57,14 @@
 [[inputs.kernel_vmstat]]
 
 [[inputs.linux_sysctl_fs]]
+
+[[inputs.netstat]]
+
+[[inputs.nstat]]
+
+[[inputs.chrony]]
+
+[[inputs.sysstat]]
 
 # # Sysstat metrics collector
 # [[inputs.sysstat]]
