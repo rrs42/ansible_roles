@@ -2,3 +2,6 @@
   yum:
     name: '*'
     state: latest
+  notify: reboot
+- name: Clean up kernel packages
+  command: package-cleanup --oldkernels --count=1 -y
