@@ -1,8 +1,0 @@
----
-- template:
-    dest: /etc/genders
-    owner: root
-    group: root
-    mode: 644
-    src: genders.j2
-  name: Generate genders file
