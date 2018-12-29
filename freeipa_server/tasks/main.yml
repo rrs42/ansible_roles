@@ -8,8 +8,8 @@
     src: ipaserver_config.sh
     dest: /root
     mode: "0755"
-- name: configure server
-  command: /root/ipaserver_config.sh
-  args:
-    creates: /etc/ipa/default.conf
-    chdir: /root
+# - name: configure server
+#   command: /root/ipaserver_config.sh
+#   args:
+#     creates: /etc/ipa/default.conf
+#     chdir: /root
