@@ -1,5 +1,6 @@
 {% set idmserver = groups["idmserver"]|sort|first %}
 {% set sysmon = groups["sysmon"]|sort|first  %}
+host-record = mirrors.core-mem.net,10.80.0.232
 host-record = idmserver.core-mem.net,{{ hostvars[idmserver]["ansible_eth0"]["ipv4"]["address"] }}
 host-record = sysmon.core-mem.net,{{ hostvars[sysmon]["ansible_eth0"]["ipv4"]["address"] }}
 srv-host = _kerberos._udp.core-mem.net,idmserver.core-mem.net,88
@@ -10,4 +11,4 @@ srv-host = _kpasswd._tcp.core-mem.net,idmserver.core-mem.net,88
 srv-host = _kpasswd._udp.core-mem.net,idmserver.core-mem.net,88
 srv-host = _ldap._tcp.core-mem.net,idmserver.core-mem.net,389
 txt-record = _kerberos.core-mem.net,"CORE-MEM.NET"
-server = {{ dnsserver }}
+server = {{ upstream_dnsserver }}
