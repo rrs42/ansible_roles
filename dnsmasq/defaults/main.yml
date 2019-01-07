@@ -1,2 +1,2 @@
 ---
-dnsserver: 10.80.0.2
+upstream_dnsserver: 10.80.0.2

@@ -8,12 +8,12 @@
     nmcli -m multiline  -g IP4.DNS device show eth0 | awk 'BEGIN{ FS=":"}{print $2}'
   register: result
 - set_fact:
-    dnsserver: "{{ result.stdout }}"
+    upstream_dnsserver: "{{ result.stdout }}"
 - name: Build DNSMasq zone file
   template:
     src: cluster.conf.j2
     dest: /etc/dnsmasq.d/cluster.conf
-    mode: 644
+    mode: "0644"
     owner: root
     group: root
   notify: dnsmasq
