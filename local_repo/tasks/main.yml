@@ -39,6 +39,15 @@
     enabled: no
     file: local
   when: use_local_centos
+- name: PGDG PostgreSQL repo
+  yum_repository:
+    name: pgdg11
+    description: PGDG PostgreSQL 11 repo
+    baseurl: "{{local_repo_base_url}}pgdg11"
+    gpgcheck: no
+    proxy: "_none_"
+    enabled: no
+    file: local
 - name: Local RPMS
   yum_repository:
     name: local
