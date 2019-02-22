@@ -1,0 +1,3 @@
+---
+dependencies:
+  - role: freeipa_client

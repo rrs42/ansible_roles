@@ -1,0 +1,6 @@
+---
+nifi_version: "1.8.0"
+nifi_filename: "nifi-{{nifi_version}}-bin.tar.gz"
+nifi_url: "http://mirrors.core-mem.net/files/{{nifi_filename}}"
+
+ansible_remote_tmp: /var/tmp/

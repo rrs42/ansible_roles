@@ -1,0 +1,17 @@
+<Location /nifi1>
+	RequestHeader add X-ProxyScheme "http"
+        RequestHeader add X-ProxyHost "sysmon.core-mem.net"
+        RequestHeader add X-ProxyPort "80"
+        RequestHeader add X-ProxyContextPath "/nifi1"
+        ProxyPass http://ip-10-80-101-171.us-gov-west-1.compute.internal:8080
+        ProxyPassReverse http://ip-10-80-101-171.us-gov-west-1.compute.internal:8080
+</Location>
+
+<Location /nifi2>
+	RequestHeader add X-ProxyScheme "http"
+        RequestHeader add X-ProxyHost "sysmon.core-mem.net"
+        RequestHeader add X-ProxyPort "80"
+        RequestHeader add X-ProxyContextPath "/nifi2"
+        ProxyPass http://ip-10-80-101-30.us-gov-west-1.compute.internal:8080
+        ProxyPassReverse http://ip-10-80-101-30.us-gov-west-1.compute.internal:8080
+</Location>
