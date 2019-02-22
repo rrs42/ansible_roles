@@ -1,0 +1,13 @@
+---
+- name: restart zookeeper
+  service:
+    name: zookeeper
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+- name: restart kafka
+  service:
+    name: kafka
+    daemon_reload: yes
+    enabled: yes
+    state: restarted

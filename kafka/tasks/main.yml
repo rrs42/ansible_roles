@@ -1,0 +1,61 @@
+---
+- unarchive:
+    remote_src: yes
+    src: "{{kafka_url}}"
+    dest: /opt
+    owner: kafka
+    group: kafka
+- file:
+    src: "/opt/kafka_{{kafka_version}}"
+    dest: /opt/kafka
+    owner: kafka
+    group: kafka
+    state: link
+- file:
+    dest: /opt/kafka-config
+    mode: "0700"
+    owner: kafka
+    group: kafka
+    state: directory
+- file:
+    dest: /opt/kafka-data
+    mode: "0700"
+    owner: kafka
+    group: kafka
+    state: directory
+- file:
+    dest: /opt/kafka/zookeeper-data
+    mode: "0700"
+    owner: kafka
+    group: kafka
+    state: directory
+- template:
+    src: "{{item}}.j2"
+    dest: "/opt/kafka-config/{{item}}"
+    mode: "0600"
+    owner: kafka
+    group: kafka
+  loop:
+    - server.properties
+    - zookeeper.properties
+- template:
+    src: "zookeeper.service.j2"
+    dest: "/etc/systemd/system/zookeeper.service"
+    mode: "0644"
+    owner: root
+    group: root
+  notify: "restart zookeeper"
+- template:
+    src: "kafka.service.j2"
+    dest: "/etc/systemd/system/kafka.service"
+    mode: "0644"
+    owner: root
+    group: root
+  notify: "restart kafka"
+- copy:
+    dest: "/opt/kafka/zookeeper-data/myid"
+    mode: "0644"
+    owner: kafka
+    group: kafka
+    content: "{{(groups['kafka']|sort).index(inventory_hostname) + 1}}"
+  notify: "restart kafka"
