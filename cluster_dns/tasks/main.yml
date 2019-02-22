@@ -1,4 +1,6 @@
 ---
+# Network manager saves it's configuration on shutdown,
+# so it must be shutdown before the config file is edited
 - name: Stop NetworkManager
   service:
     name: NetworkManager
@@ -18,3 +20,7 @@
     group: root
     mode: '0644'
   notify: restart nm
+- name: Ensure NetworkManager is still running
+  service:
+    name: NetworkManager
+    state: started
