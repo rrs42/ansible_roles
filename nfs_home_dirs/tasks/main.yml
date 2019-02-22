@@ -1,0 +1,6 @@
+---
+- name: config selinux for nfs home dirs
+  seboolean:
+    name: use_nfs_home_dirs
+    state: yes
+    persistent: yes
