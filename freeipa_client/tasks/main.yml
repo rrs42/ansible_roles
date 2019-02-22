@@ -4,8 +4,16 @@
     name:
       - ipa-client
     state: present
-- name: script to join ipa-server
-  template:
-    src: ipaclient_config.sh
-    dest: /root
-    mode: "0755"
+- command: ipa-client-install --domain=core-mem.net -p admin -N -w 1qazxsw2 -U --automount-location=cluster --force-join
+  args:
+    creates: /etc/ipa/default.conf
+    chdir: /root
+- name: krb5 dns config
+  ini_file:
+    path: /etc/krb5.conf.d/dns.conf
+    section: libdefaults
+    option: dns_canonicalize_hostname
+    value: true
+    owner: root
+    group: root
+    mode: "0644"
