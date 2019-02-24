@@ -1,0 +1,6 @@
+{% for host in groups['kafka']|sort  %}
+host-record = kafka{{ loop.index }}.core-mem.net,{{ hostvars[host].private_ip_address }}
+{% endfor %}
+{% for host in groups['zookeeper']|sort %}
+host-record = zk{{ loop.index }}.core-mem.net,{{ hostvars[host].private_ip_address }}
+{% endfor %}

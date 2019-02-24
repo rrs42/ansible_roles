@@ -1,0 +1,7 @@
+---
+- name: kafka names
+  template:
+    src: kafka.conf.j2
+    dest: /etc/dnsmasq.d/kafka.conf
+    mode: "0644"
+  notify: restart dnsmasq
