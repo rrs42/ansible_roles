@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: freeipa_client
+  - role: pbspro_client
