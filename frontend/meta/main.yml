@@ -1,0 +1,9 @@
+---
+dependencies:
+  - role: freeipa_client
+  - role: gpfs_pmcollector
+  - role: gpfs_snmp
+  - role: gpfs_gui
+  - role: gpfs_config
+  - role: gpfs_grafana_bridge
+  - role: pbspro_server
