@@ -1,0 +1,11 @@
+{% for host in groups['nifi']  %}
+<Location /nifi{{ loop.index }}>
+	RequestHeader add X-ProxyScheme "http"
+        RequestHeader add X-ProxyHost "sysmon.core-mem.net"
+        RequestHeader add X-ProxyPort "80"
+        RequestHeader add X-ProxyContextPath "/nifi{{loop.index}}"
+        ProxyPass http://{{host}}:8080
+        ProxyPassReverse http://{{host}}:8080
+</Location>
+
+{% endfor %}

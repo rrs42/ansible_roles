@@ -1,0 +1,8 @@
+---
+- template:
+    src: nifi_proxy.conf.j2
+    dest: /etc/httpd/conf.d/nifi_proxy.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: reload web
