@@ -46,3 +46,9 @@
     mode: "0644"
     owner: nifi
     group: nifi
+
+- name: start nifi service
+  service:
+    name: nifi
+    state: started
+    enabled: yes
