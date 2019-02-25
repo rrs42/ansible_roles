@@ -3,6 +3,8 @@ GPFS_PATH=/usr/lpp/mmfs/bin
 
 ${GPFS_PATH}/mmcrnsd -F ./nsd.stanza
 
+sleep 15
+
 ${GPFS_PATH}/mmcrfs fs1 -F ./nsd.stanza -T /gpfs/fs1
 
 ${GPFS_PATH}/mmmount all -a
