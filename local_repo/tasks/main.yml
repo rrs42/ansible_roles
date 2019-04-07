@@ -29,6 +29,16 @@
     enabled: yes
     file: local
   when: use_local_centos
+- name: Centos SCL Repo
+  yum_repository:
+    name: local-centos-scl
+    description: Local centos SCL
+    baseurl: "{{local_repo_base_url}}sclo"
+    gpgcheck: no
+    proxy: "_none_"
+    enabled: yes
+    file: local
+  when: use_local_centos
 - name: Local Centos epel repo
   yum_repository:
     name: epel
