@@ -30,6 +30,7 @@
     mode: "0644"
     owner: root
     group: root
+  notify: restart nifi
 
 - name: install nifi properties
   template:
@@ -38,6 +39,7 @@
     mode: "0644"
     owner: nifi
     group: nifi
+  notify: restart nifi
 
 - name: install nifi state management
   template:
@@ -46,9 +48,4 @@
     mode: "0644"
     owner: nifi
     group: nifi
-
-- name: start nifi service
-  service:
-    name: nifi
-    state: started
-    enabled: yes
+  notify: restart nifi
