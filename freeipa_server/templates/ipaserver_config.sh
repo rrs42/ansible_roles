@@ -41,3 +41,17 @@ ipa automountmap-add cluster auto.home
 ipa automountkey-add cluster auto.home --key="*" --info="-fstype=nfs4 10.80.0.232:/srv/exports/home/&"
 ipa automountkey-add cluster auto.master --key="/home" --info="auto.home"
 ipa automountkey-add cluster auto.direct --key="/site" --info="-fstype=nfs4 10.80.0.232:/srv/exports/site"
+
+ipa user-add steffenr \
+    --first="Russ" \
+    --last="Steffen" \
+    --initials="RS" \
+    --gecos="Russ Steffen" \
+    --homedir=/home/steffenr \
+    --uid=10000 \
+    --shell=/bin/bash \
+    --sshpubkey='{{ lookup( 'file', '../n62key.pub') }}'
+
+ipa sudorule-add rootme --hostcat=all --cmdcat=all --runasusercat=all
+ipa sudorule-add-user rootme --users=steffenr
+ipa sudorule-add-option rootme --sudooption='!authenticate'
