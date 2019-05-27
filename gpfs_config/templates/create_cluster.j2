@@ -28,5 +28,8 @@ ${GPFS_PATH}/mmperfmon config update \
 systemctl start pmcollector
 systemctl start zimon-bridge
 
-cd /usr/lpp/mmfs/gui/cli
-./initgui
+(
+        cd /usr/lpp/mmfs/gui/cli
+        ./initgui
+        ./mkuser admin -g SecurityAdmin -p admin001
+)
