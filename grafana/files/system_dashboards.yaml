@@ -7,4 +7,4 @@ providers:
     type: file
     disableDeletion: false
     options:
-      path: /etc/grafana/provisioning/dashboards/dash
+      path: /etc/grafana/provisioning/dashboards/system_dashboards
