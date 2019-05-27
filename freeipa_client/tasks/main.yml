@@ -13,7 +13,7 @@
     path: /etc/krb5.conf.d/dns.conf
     section: libdefaults
     option: dns_canonicalize_hostname
-    value: true
+    value: "true"
     owner: root
     group: root
     mode: "0644"
