@@ -2,9 +2,9 @@
 <body>
 {% for cluster in nifi_clusters %}
 <div>
-<h1>Cluster {{cluster}}</h1><p>
+<h1>Cluster <b>{{cluster}}</b></h1><p>
 {%    for host in groups[cluster]|sort %}
-<a href="http://{{hostvars[host].public_ip_address}}:8080/nifi">host {{loop.index}}</a>
+<a href="http://{{hostvars[host].public_dns_name}}:8080/nifi">host {{loop.index}}: {{hostvars[host].private_ip_address}}</a><p>
 {%    endfor %}
 </div>
 {% endfor %}
