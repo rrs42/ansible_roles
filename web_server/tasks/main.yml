@@ -3,6 +3,7 @@
   yum:
     name:
       - httpd
+      - mod_ssl
     state: present
   notify: restart web
 - name: allow apache to make connections
