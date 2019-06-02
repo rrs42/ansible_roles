@@ -1,0 +1,8 @@
+---
+- template:
+    src: nifi_dns.conf.j2
+    dest: /etc/dnsmasq.d/nifi_dns.conf
+    mode: "0644"
+    owner: root
+    group: root
+  notify: restart dnsmasq
