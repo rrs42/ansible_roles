@@ -5,6 +5,6 @@
     replace: '\1fips=0\2'
     backup: yes
   register: result
-  notify: reboot
+  #notify: reboot
 - command: grub2-mkconfig -o /etc/grub2.cfg
   when: result is changed
