@@ -1,0 +1,5 @@
+---
+- name: Expand  partition
+  command: "parted {{device}} resizepart {{partition_number}} 100%"
+- name: Resize PV
+  command: pvresize "{{device}}{{partition_number}}"

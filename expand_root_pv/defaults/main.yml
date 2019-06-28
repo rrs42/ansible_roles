@@ -1,0 +1,6 @@
+---
+# default AWS EC2 root device
+device: /dev/xvda
+
+# SPEL partition layput has main PV on partition 2
+partition_number: 2

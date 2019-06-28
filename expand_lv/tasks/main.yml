@@ -1,0 +1,7 @@
+---
+- name: add space to volume
+  lvol:
+    vg: "{{volume_group}}"
+    lv: "{{volume}}"
+    size: "{{size}}"
+    resizefs: yes
