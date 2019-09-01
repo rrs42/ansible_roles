@@ -1,0 +1,7 @@
+---
+local_repo: false
+repo_host: repo.core-mem.net
+repo_port: 8081
+repo_base_url: "http://{{repo_host}}:{{repo_port}}/repository/"
+grafana_repo_url: "https://packages.grafana.com/oss/rpm"
+grafana_rpm_key_url: "https://packages.grafana.com/gpg.key"

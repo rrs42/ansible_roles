@@ -1,7 +1,20 @@
 ---
-- yum_repository:
-    name: grafana
-    description: Grafana Yum Repository
-    baseurl: https://packages.grafana.com/oss/rpm
-    gpgkey: https://packages.grafana.com/gpg.key
-  name: grafana repository
+- block:
+    - yum_repository:
+        name: local-grafana
+        description: local Grafana repo
+        baseurl: "{{repo_base_url}}/grafana/"
+        cost: "10"
+        file: local-grafana
+      name: local Grafana Repository
+  when: local_repo|bool
+
+- block:
+    - yum_repository:
+        name: grafana
+        description: Grafana Yum Repository
+        baseurl: "{{grafana_repo_url}}"
+        gpgkey: "{{grafana_rpm_key_url}}"
+        file: grafana
+      name: grafana repository
+  when: not local_repo|bool

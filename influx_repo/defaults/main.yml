@@ -1,0 +1,6 @@
+---
+local_repo: false
+repo_host: repo.core-mem.net
+repo_port: 8081
+repo_base_url: "http://{{repo_host}}:{{repo_port}}/repository/"
+influx_repo_base_url: "https://repos.influxdata.com/rhel/$releasever/$basearch/stable"
