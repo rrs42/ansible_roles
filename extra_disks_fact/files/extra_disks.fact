@@ -1,16 +1,45 @@
-#!/bin/bash
+#!/usr/bin/python
+# Ansible fact to gather a list of all disks without partitions
+# requires Python 2.7+, 3.6+
 
-json="["
+from __future__ import print_function
 
-disks=""
+import json
+from subprocess import Popen, PIPE
 
-for disk in `lsblk --nodeps -n --output NAME | grep -v xvda`
-do
-	disks="${disks} \"${disk}\","
-done
 
-disks=`echo ${disks}|sed 's/,$//'`
+def convert_dict(line):
+    result = {}
+    for pair in i.split(' '):
+        kv = pair.split('=')
+        if len(kv) > 1:
+            key = kv[0]
+            value = kv[1].strip('"')
+            result[key] = value
+    return result
 
-json="${json}${disks}]"
 
-echo $json
+p = Popen(['lsblk', '-nP', '-o', 'NAME,TYPE'], stdout=PIPE)
+r = p.communicate()[0].decode('utf-8').strip().split('\n')
+
+disks = []
+
+for i in r:
+    entry = convert_dict(i)
+    if entry['TYPE'] == 'disk':
+        disks.append(entry['NAME'])
+
+unused_disks = []
+
+for disk in disks:
+    p = Popen(['lsblk', '-nP', '-o', 'NAME,TYPE', '/dev/'+disk], stdout=PIPE)
+    r = p.communicate()[0].decode('utf-8').strip().split('\n')
+    part_count = 0
+    for i in r:
+        entry = convert_dict(i)
+        if entry['TYPE'] == 'part':
+            part_count += 1
+    if part_count == 0:
+        unused_disks.append(disk)
+
+print(json.dumps(unused_disks))
