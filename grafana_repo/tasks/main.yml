@@ -6,6 +6,7 @@
         baseurl: "{{repo_base_url}}/grafana/"
         cost: "10"
         file: local-grafana
+        gpgcheck: no
       name: local Grafana Repository
   when: local_repo|bool
 
