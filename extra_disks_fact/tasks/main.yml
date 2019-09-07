@@ -9,3 +9,8 @@
     src: extra_disks.fact
     dest: "/etc/ansible/facts.d/extra_disks.fact"
     mode: "0755"
+  register: result
+
+- name: Reload facts
+  setup: ~
+  when: result is changed
