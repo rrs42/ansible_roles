@@ -2,13 +2,13 @@
 
 serial=$(date +%Y%m%d%H%M)
 
-ipa-server-install -N -U -p 1qazxsw2 -a 1qazxsw2 \
-    -n core-mem.net -r CORE-MEM.NET \
-    --ca-subject="CN=Certificate Authority, O=CORE-MEM.NET ${serial}" \
-    --idstart=2000
+ipa-server-install -N -U -p {{ipa_default_password}} -a {{ipa_default_password}} \
+    -n {{ipa_domain}} -r {{ipa_realm}} \
+    --ca-subject="CN=Certificate Authority, O={{ipa_realm}} ${serial}" \
+    --idstart={{ipa_idstart}}
 #   --hostname=idmserver.core-mem.net
 
-echo 1qazxsw2 | kinit admin
+echo {{ipa_default_password}} | kinit admin
 
 ipa config-mod --defaultshell=/bin/bash
 
