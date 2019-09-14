@@ -1,0 +1,9 @@
+---
+- name: configure freeipa server
+  command: /root/ipaserver_config.sh
+  args:
+    creates: /etc/ipa/default.conf
+    chdir: /root
+  register: script_output
+- debug:
+    var: script_output.stdout_lines

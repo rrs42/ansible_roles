@@ -1,0 +1,19 @@
+---
+- name: Install pkgs
+  yum:
+    name: dnsmasq
+    state: present
+- name: Get DNS server from NM
+  shell: |
+    nmcli -t -m multiline  -g IP4.DNS device show | awk 'BEGIN{ FS=":"} /IP4.DNS\[1\]/{print $2}'
+  register: result
+- set_fact:
+    upstream_dnsserver: "{{ result.stdout }}"
+- name: Build DNSMasq base config file
+  template:
+    src: upstream.conf.j2
+    dest: /etc/dnsmasq.d/00-upstream.conf
+    mode: "0644"
+    owner: root
+    group: root
+  notify: dnsmasq
