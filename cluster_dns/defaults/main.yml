@@ -1,0 +1,2 @@
+---
+nameserver: '{{ hostvars[groups["dnsserver"]|sort|first].ansible_default_ipv4.address }}'
