@@ -1,1 +1,3 @@
-server = {{ upstream_dnsserver }}
+{% for server in upstream_dnsserver %}
+server = {{ server }}
+{% endfor %}

@@ -4,11 +4,12 @@
     name: dnsmasq
     state: present
 - name: Get DNS server from NM
-  shell: |
-    nmcli -t -m multiline  -g IP4.DNS device show | awk 'BEGIN{ FS=":"} /IP4.DNS\[1\]/{print $2}'
+  shell: >
+    nmcli -t -m multiline  -g IP4.DNS device show |
+    awk 'BEGIN{ FS=":"; count=0} /IP4.DNS\[1\]/{dns[count++]=$2} END{for(i in dns){print dns[i]}}'
   register: result
 - set_fact:
-    upstream_dnsserver: "{{ result.stdout }}"
+    upstream_dnsserver: "{{ result.stdout.split(\n)|list }}"
 - name: Build DNSMasq base config file
   template:
     src: upstream.conf.j2
