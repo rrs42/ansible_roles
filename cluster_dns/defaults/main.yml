@@ -1,7 +1,19 @@
 ---
 nameservers: >-
-  {%- set dns_ips = [] %}
-  {%- for ns in groups["dnsserver"] %}
-    {%- do dns_ips.append(hostvars[ns].ansible_default_ipv4.address) %}
-  {% endfor -%}
+  {%- if ansible_virtualization_type == 'virtualbox' %}
+    {%- set dns_ips = [] %}
+    {%- for ns in groups ["dnsserver"] %}
+      {%- for intf in hostvars[ns].ansible_interfaces %}
+        {%- if intf != "lo" and hostvars[ns].ansible_facts[intf].ipv4.address != "10.0.2.15" %}
+          {%- do dns_ips.append(hostvars[ns].ansible_facts[intf].ipv4.address) %}
+          {%- break %}
+        {%- endif %}
+      {%- endfor %}
+    {%- endfor %}
+  {%- else %}
+    {%- set dns_ips = [] %}
+    {%- for ns in groups["dnsserver"] %}
+      {%- do dns_ips.append(hostvars[ns].ansible_default_ipv4.address) %}
+    {%- endfor %}
+  {% endif -%}
   {{ dns_ips }}
