@@ -3,16 +3,20 @@
 # so it must be shutdown before the config file is edited
 - debug:
     var: nameservers
+- name: get nm connection names
+  command: >
+    nmcli -t -f NAME connection show
+  register: results
+- set_fact:
+    nm_connections: "{{results.stdout_lines}}"
 - name: Override DHCP nameservers
   command: >
-    nmcli device modify {{item}} ipv4.ignore-auto-dns 1
-  when: item != "lo"
-  loop: "{{ansible_facts.interfaces}}"
+    nmcli connection modify "{{item}}" ipv4.ignore-auto-dns yes
+  loop: "{{nm_connections}}"
 - name: Set new DNS Servers
   command: >
-    nmcli device modify {{item}} ipv4.dns {{nameservers|join(",")}}
-  when: item != "lo"
-  loop: "{{ansible_facts.interfaces}}"
+    nmcli connection modify "{{item}}" ipv4.dns {{nameservers|join(",")}}
+  loop: "{{nm_connections}}"
 - name: Ensure NetworkManager is still running
   service:
     name: NetworkManager
