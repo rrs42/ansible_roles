@@ -1,26 +1,19 @@
 ---
 # Network manager saves it's configuration on shutdown,
 # so it must be shutdown before the config file is edited
-- name: Stop NetworkManager
-  service:
-    name: NetworkManager
-    state: stopped
-- name: configure Network Manager
-  ini_file:
-    path: /etc/NetworkManager/NetworkManager.conf
-    section: main
-    option: dns
-    value: none
-  notify: restart nm
-- name: update resolv.conf
-  template:
-    dest: /etc/resolv.conf
-    src: resolv.conf.j2
-    owner: root
-    group: root
-    mode: '0644'
-  notify: restart nm
+- debug:
+    var: nameservers
+- name: Override DHCP nameservers
+  command: >
+    nmcli device modify {{item}} ipv4.ignore-auto-dns 1
+  when: item != "lo"
+  loop: "{{ansible_facts.interfaces}}"
+- name: Set new DNS Servers
+  command: >
+    nmcli device modify {{item}} ipv4.dns {{nameservers|join(",")}}
+  when: item != "lo"
+  loop: "{{ansible_facts.interfaces}}"
 - name: Ensure NetworkManager is still running
   service:
     name: NetworkManager
-    state: started
+    state: restarted

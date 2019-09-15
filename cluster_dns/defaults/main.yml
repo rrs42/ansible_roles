@@ -1,2 +1,2 @@
 ---
-nameserver: '{{ hostvars[groups["dnsserver"]|sort|first].ansible_default_ipv4.address }}'
+nameservers: '{% set dns_ips = [] %}{% for ns in groups["dnsserver"] %}{% do dns_ips.append(hostvars[ns].ansible_default_ipv4.address) %}{% endfor %}{{ dns_ips }}'
