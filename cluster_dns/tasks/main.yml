@@ -1,8 +1,6 @@
 ---
 # Network manager saves it's configuration on shutdown,
 # so it must be shutdown before the config file is edited
-- debug:
-    var: nameservers
 - name: get nm connection names
   command: >
     nmcli -t -f NAME connection show
