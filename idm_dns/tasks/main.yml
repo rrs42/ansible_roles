@@ -1,18 +1,8 @@
 ---
-- name: Install pkgs
-  yum:
-    name: dnsmasq
-    state: present
-- name: Get DNS server from NM
-  shell: |
-    nmcli -m multiline  -g IP4.DNS device show eth0 | awk 'BEGIN{ FS=":"}{print $2}'
-  register: result
-- set_fact:
-    upstream_dnsserver: "{{ result.stdout }}"
 - name: Build DNSMasq zone file
   template:
-    src: cluster.conf.j2
-    dest: /etc/dnsmasq.d/cluster.conf
+    src: idmserver.conf.j2
+    dest: /etc/dnsmasq.d/idmserver.conf
     mode: "0644"
     owner: root
     group: root

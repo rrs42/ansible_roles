@@ -1,7 +1,1 @@
 ---
-- name: restart dnsmasq
-  listen: dnsmasq
-  service:
-    name: dnsmasq
-    state: restarted
-    enabled: yes
