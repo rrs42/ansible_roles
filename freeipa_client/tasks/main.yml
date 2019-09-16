@@ -4,7 +4,8 @@
     name:
       - ipa-client
     state: present
-- command: ipa-client-install --domain=core-mem.net -p admin -N -w 1qazxsw2 -U --automount-location=cluster --force-join
+  # --automount-location=cluster
+- command: "ipa-client-install --domain={{ipa_domain}} -p admin -N -w {{ipa_default_password}} -U  --force-join"
   args:
     creates: /etc/ipa/default.conf
     chdir: /root
