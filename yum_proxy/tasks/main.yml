@@ -1,8 +1,0 @@
----
-- lineinfile:
-    path: /etc/yum.conf
-    regexp: "^proxy="
-    insertafter: '^distroverpkg='
-    line: "proxy=http://{{ yum_proxy_host }}:{{ yum_proxy_port }}"
-  when: yum_proxy
-  name: configure yum to use proxy

@@ -1,4 +1,0 @@
----
-yum_proxy: false
-yum_proxy_host: "proxy"
-yum_proxy_port: 3128
