@@ -62,13 +62,13 @@
 - block:
   - name: Local GPFS RPMS
     yum_repository:
-      name: "local-gpfs-{{item}}"
+      name: "local-{{item}}"
       description: "Local centos repo {{item}}"
       baseurl: "{{repo_base_url}}/gpfs/{{item}}"
       gpgcheck: no
       proxy: "_none_"
       enabled: no
-      file: local-rpms
+      file: local-gpfs
       cost: "10"
     loop: "{{gpfs_repos}}"
   when: local_repo|bool
