@@ -5,8 +5,8 @@
     state: present
 - name: build server configuration script
   template:
-    src: ipaserver_config.sh
-    dest: /root
+    src: ipaserver_config.sh.j2
+    dest: /root/ipaserver_config.sh
     mode: "0755"
 # - name: configure server
 #   command: /root/ipaserver_config.sh
