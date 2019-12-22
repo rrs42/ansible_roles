@@ -1,7 +1,7 @@
 ---
 - block:
     - yum_repository:
-        name: local-influx-rhel-$releasever
+        name: local-influx-rhel
         description: Local InfluxDB Repository
         baseurl: "{{repo_base_url}}/influxdb/"
         file: local-influx
@@ -12,7 +12,7 @@
 
 - block:
     - yum_repository:
-        name: influx-rhel-$releasever
+        name: influx-rhel
         description: InfluxDB Repository
         baseurl: https://repos.influxdata.com/rhel/$releasever/$basearch/stable
         file: influx

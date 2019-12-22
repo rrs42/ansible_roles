@@ -1,0 +1,7 @@
+---
+repo_base_url: "http://{{repo_host}}:{{repo_port}}/repository"
+
+centos_repos:
+    - os
+    - updates
+    - extras

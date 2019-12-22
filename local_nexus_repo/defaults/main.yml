@@ -2,12 +2,7 @@
 local_repo: yes
 repo_host: repo.core-mem.net
 repo_port: 8081
-repo_base_url: "http://{{repo_host}}:{{repo_port}}/repository/"
 
-centos_repos:
-  - os
-  - updates
-  - extras
 gpfs_repos:
   - gpfs_rpms
   - zimon_rpms

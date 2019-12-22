@@ -1,0 +1,44 @@
+# Setup RHEL 7 Repos
+# Centos Repos
+- block:
+    - name: Local Centos Base OS repo
+      yum_repository:
+        name: "local-centos-{{item}}"
+        description: "Local centos repo {{item}}"
+        baseurl: "{{repo_base_url}}/centos/$releasever/{{item}}/$basearch"
+        gpgcheck: no
+        proxy: "_none_"
+        enabled: yes
+        file: local-centos
+        cost: "10"
+      loop: "{{centos_repos}}"
+    - name: Disable default Centos repos
+      command: "yum-config-manager --disable {{item}}"
+      loop: "{{centos_repos}}"
+  when: local_repo|bool
+
+# Local EPEL Repo
+- block:
+    - name: Remove Regular epel-release rpm
+      yum:
+        name: epel-release
+        state: absent
+    - name: Local EPEL Repo
+      yum_repository:
+        name: "epel"
+        description: "Locally built RPMS"
+        baseurl: "{{repo_base_url}}/epel/$releasever/$basearch"
+        gpgcheck: no
+        proxy: "_none_"
+        enabled: no
+        file: local-epel
+        cost: "10"
+  when: local_repo|bool
+
+# EPEL from RPM
+- block:
+      - name: Install epel rpm
+        yum:
+          name: epel-release
+          state: present
+  when: not local_repo|bool

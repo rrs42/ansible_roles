@@ -1,62 +1,49 @@
 ---
-# Centos Repos
-- block:
-  - name: Local Centos Base OS repo
-    yum_repository:
-      name: "local-centos-{{item}}"
-      description: "Local centos repo {{item}}"
-      baseurl: "{{repo_base_url}}/centos/$releasever/{{item}}/$basearch"
-      gpgcheck: no
-      proxy: "_none_"
-      enabled: yes
-      file: local-centos
-      cost: "10"
-    loop: "{{centos_repos}}"
-  - name: Disable default Centos repos
-    command: "yum-config-manager --disable {{item}}"
-    loop:
-      - base
-      - extras
-      - updates
-  when: local_repo|bool
-
-# Local EPEL Repo
-- block:
-  - name: Remove Regular epel-release rpm
-    yum:
-      name: epel-release
-      state: absent
-  - name: Local EPEL Repo
-    yum_repository:
-      name: "epel"
-      description: "Locally built RPMS"
-      baseurl: "{{repo_base_url}}/epel/$releasever/$basearch"
-      gpgcheck: no
-      proxy: "_none_"
-      enabled: no
-      file: local-epel
-      cost: "10"
-  when: local_repo|bool
-- block:
-    - name: Install epel rpm
-      yum:
-        name: epel-release
-        state: present
-  when: not local_repo|bool
+- name: Distro-specific vars include
+  include_vars:
+    file: "rhel{{ansible_distribution_major_version}}.yml"
+- name: Distro-specific repo include
+  include_tasks: "rhel{{ansible_distribution_major_version}}.yml"
 
 # Local RPM repo
 - block:
-  - name: Locally built RPMS
+  - name: Locally built RPMS - distro specific
     yum_repository:
       name: "local-rpms"
       description: "Locally built RPMS"
-      baseurl: "{{repo_base_url}}/local-rpms"
+      baseurl: "{{repo_base_url}}/centos-local/$releasever/$basearch"
       gpgcheck: no
-      proxy: "_none_"
       enabled: yes
       file: local
       cost: "10"
   when: local_repo|bool
+
+# Local RPM repo - common
+- block:
+  - name: Locally built RPMS - common
+    yum_repository:
+      name: "local-rpms-common"
+      description: "Locally built RPMS - common"
+      baseurl: "{{repo_base_url}}/centos-local/common/$basearch"
+      gpgcheck: no
+      enabled: yes
+      file: local
+      cost: "10"
+  when: local_repo|bool
+
+# JC21 misc repo
+- block:
+  - name: JC21 misc repo
+    yum_repository:
+      name: "jc21"
+      description: "JC21 misc repo"
+      baseurl: "{{repo_base_url}}/jc21/centos/base/el/$releasever/"
+      gpgcheck: no
+      enabled: yes
+      file: jc21
+      cost: "10"
+  when: local_repo|bool
+
 
 # Local GPFS RPMS
 - block:
@@ -66,7 +53,6 @@
       description: "Local centos repo {{item}}"
       baseurl: "{{repo_base_url}}/gpfs/{{item}}"
       gpgcheck: no
-      proxy: "_none_"
       enabled: no
       file: local-gpfs
       cost: "10"
