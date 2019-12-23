@@ -5,8 +5,8 @@
     state: "directory"
 
 - name: Install nsd server disk device task
-  copy:
-    src: extra_disks.fact
+  template:
+    src: extra_disks.fact.j2
     dest: "/etc/ansible/facts.d/extra_disks.fact"
     mode: "0755"
   register: result
