@@ -1,0 +1,5 @@
+---
+- name: install ipa/idm server
+  yum:
+    name: "@idm:DL1/server"
+    state: present

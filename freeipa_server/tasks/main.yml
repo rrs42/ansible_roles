@@ -1,8 +1,6 @@
 ---
 - name: install ipaserver
-  yum:
-    name: ipa-server
-    state: present
+  include_tasks: "rhel{{ansible_distribution_major_version}}.yml"
 - name: build server configuration script
   template:
     src: ipaserver_config.sh.j2
