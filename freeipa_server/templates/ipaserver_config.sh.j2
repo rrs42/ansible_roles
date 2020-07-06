@@ -21,8 +21,12 @@ ipa user-add {{ user.username }} \
     --displayname="{{ user.gecos }}" \
     --homedir="{{user.homedir}}" \
     --shell="{{user.shell}}" \
+{% if 'uid' in user %}
     --uid={{user.uid}} \
+{% endif %}
+{% if 'gid' in user %}
     --gidnumber={{user.gid}} \
+{% endif %}
 {% if 'sshpubkey' in user %}
     --sshpubkey='{{ user.sshpubkey }}' \
 {% endif %}
