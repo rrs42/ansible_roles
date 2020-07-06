@@ -1,0 +1,56 @@
+---
+- name: System accounts low uid
+  lineinfile:
+    path: /etc/login.defs
+    state: present
+    regexp: "^SYS_UID_MIN"
+    line: "SYS_UID_MIN    {{system_min}}"
+
+- name: System accounts high uid
+  lineinfile:
+    path: /etc/login.defs
+    state: present
+    regexp: "^SYS_UID_MAX"
+    line: "SYS_UID_MAX    {{system_max}}"
+
+- name: User accounts low uid
+  lineinfile:
+      path: /etc/login.defs
+      state: present
+      regexp: "^UID_MIN"
+      line: "UID_MIN    {{user_min}}"
+
+- name: User accounts high uid
+  lineinfile:
+    path: /etc/login.defs
+    state: present
+    regexp: "^UID_MAX"
+    line: "UID_MAX    {{user_max}}"
+
+- name: System accounts low gid
+  lineinfile:
+    path: /etc/login.defs
+    state: present
+    regexp: "^SYS_GID_MIN"
+    line: "SYS_GID_MIN    {{system_min}}"
+
+- name: System accounts high gid
+  lineinfile:
+    path: /etc/login.defs
+    state: present
+    regexp: "^SYS_GID_MAX"
+    line: "SYS_GID_MAX    {{system_max}}"
+
+- name: User accounts low gid
+  lineinfile:
+      path: /etc/login.defs
+      state: present
+      regexp: "^GID_MIN"
+      line: "GID_MIN    {{user_min}}"
+
+- name: User accounts high gid
+  lineinfile:
+    path: /etc/login.defs
+    state: present
+    regexp: "^GID_MAX"
+    line: "GID_MAX    {{user_max}}"
