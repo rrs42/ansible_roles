@@ -1,0 +1,8 @@
+---
+- yum:
+    name: squid
+    state: present
+- service:
+    name: squid
+    state: restarted
+    enabled: yes
