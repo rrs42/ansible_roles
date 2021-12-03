@@ -1,19 +1,18 @@
-# Setup RHEL 8 Repos
-# Centos Repos
+# Enable local distribution mirror
 - block:
-    - name: Local Centos Base OS repo
+    - name: Local Base OS repos
       yum_repository:
-        name: "local-centos-{{item}}"
+        name: "local-{{item}}"
         description: "Local centos repo {{item}}"
-        baseurl: "{{repo_base_url}}/centos/$releasever/{{item}}/$basearch/os"
+        baseurl: "{{repo_base_url}}/{{dist_map[ansible_distribution]}}/$releasever/{{item}}/$basearch/os"
         gpgcheck: no
         enabled: yes
-        file: local-centos
+        file: local
         cost: "10"
       loop: "{{centos_repos}}"
-    - name: Disable default Centos repos
-      command: "yum-config-manager --disable {{item}}"
-      loop: "{{centos_repos}}"
+    - name: Disable default Cento repos
+      command: "dnf config-manager --disable {{item}}"
+      loop: "{{dist_repos}}"
   when: local_repo|bool
 
 # Local EPEL Repo

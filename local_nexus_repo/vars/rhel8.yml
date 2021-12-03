@@ -1,7 +1,35 @@
 ---
 repo_base_url: "http://{{repo_host}}:{{repo_port}}/repository"
 
+dist_repos:
+    - baseos
+    - appstream
+    - extras
+
 centos_repos:
     - BaseOS
     - AppStream
     - extras
+
+repo_map:
+    baseos:
+        path: BaseOS
+        enabled: yes
+    appstream:
+        path: AppStream
+        enabled: yes
+    extras:
+        path: extras
+        enabled: yes
+    powertools:
+        path: PowerTools
+        enabled: no
+    plus:
+        path: plus
+        enabled: no
+
+
+dist_map:
+    Rocky:  rocky
+    AlmaLinux: almalinux
+    CentOS: centos
