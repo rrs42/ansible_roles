@@ -1,7 +1,7 @@
 ---
 ipa_realm: CORE-MEM.NET
 ipa_domain: core-mem.net
-ipa_idstart: 2000
+ipa_idstart: 13000
 ipa_default_password: 1qazxsw2
 
 ipa_users: []
