@@ -1,5 +1,3 @@
-local_repo_host: mirror
-local_repo_port: 80
 gpfs_packages:
   - gpfs.gskit
   - gpfs.base
@@ -9,5 +7,6 @@ gpfs_packages:
   - gpfs.msg.en_US
   - gpfs.gss.pmsensors
   - 'gpfs.gplbin-{{ansible_kernel}}'
-gpfs_version: 5.0
-gpfs_repo_base: "http://{{local_repo_host}}:{{local_repo_port}}/mrepo/gpfs-x86_64/RPMS."
+gpfs_repos:
+  - local-gpfs_rpms
+  - local-zimon_rpms

@@ -5,3 +5,4 @@
   yum:
     name: "{{ gpfs_packages }}"
     state: "present"
+    enablerepo: "{{ gpfs_repos }}"
