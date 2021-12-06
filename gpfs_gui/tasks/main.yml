@@ -1,5 +1,8 @@
 ---
-- yum: name=gpfs.gui state=present
+- yum:
+    name: gpfs.gui
+    state: present
+    enablerepo: "{{ gpfs_repos }}"
 - service:
     name: gpfsgui.service
     state: started
