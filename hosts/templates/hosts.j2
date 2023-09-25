@@ -11,12 +11,6 @@
 {% endfor %}
 {%- endfor %}
 
-{% if ansible_facts.virtualization_type == 'virtualbox' %}
-10.0.2.2    repo.core-mem.net
-{% elif ansible_facts.virtualization_type == 'parallels' %}
-10.211.55.2 repo.core-mem.net
-{% endif %}
-
 {% for host in host_list %}
 {{ host.ip_addr }}   {{ host.name }}{% if host.alias_list is defined %}{% for alias in host.alias_list %} {{ alias }}{% endfor %}{% endif %}
 
