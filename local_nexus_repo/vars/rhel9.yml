@@ -1,0 +1,57 @@
+---
+repo_base_url: "http://{{repo_host}}:{{repo_port}}/repository"
+
+dist_repos:
+    - baseos
+    - appstream
+    - extras
+
+centos_repos:
+    - AppStream
+    - BaseOS
+    - CRB
+    - HighAvailability
+    - NFV
+    - RT
+    - ResilientStorage
+    - SAP
+    - SAPHANA
+    - extras
+    - plus
+
+repo_map:
+    baseos:
+        path: BaseOS
+        enabled: yes
+    appstream:
+        path: AppStream
+        enabled: yes
+    crb:
+        path: CRB
+        enabled: no
+    highavailability:
+        path: HighAvailability
+        enabled: no
+    nfv:
+        path: NFV
+        enabled: no
+    resilientstorage:
+        path: ResilientStorage
+        enabled: no
+    sap:
+        path: SAP
+        enabled: no
+    saphana:
+        path: SAPHANA
+        enabled: no
+    extras:
+        path: extras
+        enabled: yes
+    plus:
+        path: plus
+        enabled: no
+
+dist_map:
+    Rocky: rocky
+    AlmaLinux: almalinux
+    CentOS: centos

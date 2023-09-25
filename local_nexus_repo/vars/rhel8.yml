@@ -10,6 +10,7 @@ centos_repos:
     - BaseOS
     - AppStream
     - extras
+    - PowerTools
 
 repo_map:
     baseos:

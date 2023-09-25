@@ -1,0 +1,41 @@
+# Enable local distribution mirror
+- block:
+    - name: Local Base OS repos
+      yum_repository:
+        name: "local-{{item.key}}"
+        description: "Local EL9 repo {{item.key}}"
+        baseurl: "{{repo_base_url}}/{{dist_map[ansible_distribution]}}/$releasever/{{item.value.path}}/$basearch/os"
+        gpgcheck: no
+        enabled: "{{item.value.enabled}}"
+        file: local
+        cost: "10"
+      loop: "{{repo_map | dict2items}}"
+    - name: Disable default Cento repos
+      command: "dnf config-manager --disable {{item}}"
+      loop: "{{dist_repos}}"
+  when: local_repo|bool
+
+# Local EPEL Repo
+- block:
+    - name: Remove Regular epel-release rpm
+      yum:
+        name: epel-release
+        state: absent
+    - name: Local EPEL Repo
+      yum_repository:
+        name: "epel"
+        description: "Locally built RPMS"
+        baseurl: "{{repo_base_url}}/epel/$releasever/Everything/$basearch"
+        gpgcheck: no
+        enabled: no
+        file: local-epel
+        cost: "10"
+  when: local_repo|bool
+
+# EPEL from RPM
+- block:
+    - name: Install epel rpm
+      yum:
+        name: epel-release
+        state: present
+  when: not local_repo|bool

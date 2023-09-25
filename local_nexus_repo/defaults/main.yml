@@ -1,7 +1,7 @@
 ---
 local_repo: yes
 repo_host: repo.core-mem.net
-repo_port: 8081
+repo_port: 80
 
 gpfs_repos:
   - gpfs_rpms

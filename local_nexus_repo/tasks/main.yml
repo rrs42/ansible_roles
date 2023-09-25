@@ -7,54 +7,40 @@
 
 # Local RPM repo
 - block:
-  - name: Locally built RPMS - distro specific
-    yum_repository:
-      name: "local-rpms"
-      description: "Locally built RPMS"
-      baseurl: "{{repo_base_url}}/centos-local/$releasever/$basearch"
-      gpgcheck: no
-      enabled: yes
-      file: local
-      cost: "10"
-  when: local_repo|bool
-
-# Local RPM repo - common
-- block:
-  - name: Locally built RPMS - common
-    yum_repository:
-      name: "local-rpms-common"
-      description: "Locally built RPMS - common"
-      baseurl: "{{repo_base_url}}/centos-local/common/$basearch"
-      gpgcheck: no
-      enabled: yes
-      file: local
-      cost: "10"
+    - name: Locally built RPMS - distro specific
+      yum_repository:
+        name: "local-rpms"
+        description: "Locally built RPMS"
+        baseurl: "{{repo_base_url}}/local-rpm/$releasever/$basearch"
+        gpgcheck: no
+        enabled: no
+        file: local
+        cost: "10"
   when: local_repo|bool
 
 # JC21 misc repo
 - block:
-  - name: JC21 misc repo
-    yum_repository:
-      name: "jc21"
-      description: "JC21 misc repo"
-      baseurl: "{{repo_base_url}}/jc21/centos/base/el/$releasever/"
-      gpgcheck: no
-      enabled: yes
-      file: jc21
-      cost: "10"
+    - name: JC21 misc repo
+      yum_repository:
+        name: "jc21"
+        description: "JC21 misc repo"
+        baseurl: "{{repo_base_url}}/jc21/centos/base/el/all/"
+        gpgcheck: no
+        enabled: no
+        file: jc21
+        cost: "10"
   when: local_repo|bool
-
 
 # Local GPFS RPMS
 - block:
-  - name: Local GPFS RPMS
-    yum_repository:
-      name: "local-{{item}}"
-      description: "Local centos repo {{item}}"
-      baseurl: "{{repo_base_url}}/gpfs/{{item}}"
-      gpgcheck: no
-      enabled: no
-      file: local-gpfs
-      cost: "10"
-    loop: "{{gpfs_repos}}"
+    - name: Local GPFS RPMS
+      yum_repository:
+        name: "local-{{item}}"
+        description: "Local centos repo {{item}}"
+        baseurl: "{{repo_base_url}}/gpfs/{{item}}"
+        gpgcheck: no
+        enabled: no
+        file: local-gpfs
+        cost: "10"
+      loop: "{{gpfs_repos}}"
   when: local_repo|bool
